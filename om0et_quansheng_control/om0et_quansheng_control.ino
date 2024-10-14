@@ -1,9 +1,9 @@
 // -----
-// om0et_quansheng_contro.ino - Rotrary encoder based control of OM0ET Quansheng desktop transceiver
+// om0et_quansheng_control.ino - Rotary encoder based control of OM0ET Quansheng desktop transceiver
 // -----
 // 13.10.2014 created by Pavol OM0WT
 // Created: "2024-10-13 21:25:38"
-// Last-Modified: "2024-10-14 12:42:40"
+// Last-Modified: "2024-10-14 12:44:15"
 // -----
 
 #include <Arduino.h>
