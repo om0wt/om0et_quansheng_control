@@ -25,7 +25,7 @@ jobs:
             - name: esp32:d1_mini32
               source-url: https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
               version: 3.0.0
-          fqbn: esp32:esp32:d1_mini32
+          fqbn: esp32:esp32:ESP32
 
           sketch-paths: |
             # Configure the action to search all folders under the root of the repository for sketches and compile them.
