@@ -1,4 +1,4 @@
-# OM0ET Quansheng based desktop transceiver menu controller
+# OM0ET Quansheng based desktop transceiver menu encoder controller
 
 Rotary encoder based menu controller for OM0ET Quansheng based desktop transceiver.
 
