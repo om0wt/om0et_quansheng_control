@@ -14,6 +14,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Display GITHUB_TOKEN
+        run: echo "GITHUB_TOKEN is: $GITHUB_TOKEN"  # Debugging line, REMOVE after testing
+
+
       # For more information: https://github.com/arduino/compile-sketches#readme
       - name: Compile sketch
         uses: arduino/compile-sketches@v1
@@ -55,7 +59,7 @@ jobs:
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  #
         with:
           tag_name: 'v1.0.${{ github.run_number }}'
           release_name: 'Release ${{ github.run_number }}'
@@ -64,7 +68,7 @@ jobs:
 
       # Upload compiled binary to the release
       - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
+        uses: actions/upload-release-asset@v2
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./compiled_bin/om0et_quansheng_control.ino.merged.bin
