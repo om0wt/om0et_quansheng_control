@@ -3,7 +3,7 @@ name: Compile Sketch and Release
 on:
   push:
     tags:
-      - 'v*'  # This will trigger the workflow for any tag starting with 'v'
+      - '*'  # This will trigger the workflow for any tag
 
 jobs:
   compile-and-release:
@@ -12,6 +12,13 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Debug Information
+        run: |
+          echo "Triggered by: ${{ github.event_name }}"
+          echo "Ref: ${{ github.ref }}"
+          echo "SHA: ${{ github.sha }}"
+          echo "Tag: ${{ github.ref_name }}"
           
       - name: Compile sketch
         uses: arduino/compile-sketches@v1
