@@ -54,8 +54,8 @@ jobs:
       - name: Create GitHub Release
         id: create_release
         uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # env:
+        #  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: 'v1.0.${{ github.run_number }}'
           release_name: 'Release ${{ github.run_number }}'
@@ -68,5 +68,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./compiled_bin/*.bin
-          asset_name: compiled-sketch.bin
+          asset_name: om0et_quansheng_control.ino.merged.bin
           asset_content_type: application/octet-stream 
