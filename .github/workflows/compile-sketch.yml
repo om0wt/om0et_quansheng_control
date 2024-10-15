@@ -38,14 +38,19 @@ jobs:
           name: compiled-sketch
           path: ./compiled_bin/om0et_quansheng_control.ino.merged.bin
 
+      - name: Generate version number
+        id: version
+        run: |
+          echo "VERSION=1.0.${{ github.run_number }}" >> $GITHUB_OUTPUT
+
       - name: Create GitHub Release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: 'v1.0.${{ github.run_number }}'
-          release_name: 'Release ${{ github.run_number }}'
+          tag_name: 'v${{ steps.version.outputs.VERSION }}'
+          release_name: 'Release ${{ steps.version.outputs.VERSION }}'
           draft: false
           prerelease: false
 
