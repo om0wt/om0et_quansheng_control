@@ -13,11 +13,10 @@ jobs:
       # This step makes the contents of the repository available to the workflow
       - name: Checkout repository
         uses: actions/checkout@v4
-
+      
       - name: Display GITHUB_TOKEN
-        run: echo "GITHUB_TOKEN is: ${GITHUB_TOKEN}"  # Debugging line, REMOVE after testing
-
-
+        run: echo "GITHUB_TOKEN is $GITHUB_TOKEN"
+        
       # For more information: https://github.com/arduino/compile-sketches#readme
       - name: Compile sketch
         uses: arduino/compile-sketches@v1
