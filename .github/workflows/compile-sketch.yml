@@ -1,11 +1,12 @@
-name: Compile Sketch
+name: Compile Sketch and Release
 
 on:
-  - push
-  - pull_request
+  push:
+    tags:
+      - 'v*'  # This will trigger the workflow for any tag starting with 'v'
 
 jobs:
-  compile-sketch:
+  compile-and-release:
     runs-on: ubuntu-latest
 
     steps:
@@ -38,10 +39,9 @@ jobs:
           name: compiled-sketch
           path: ./compiled_bin/om0et_quansheng_control.ino.merged.bin
 
-      - name: Generate version number
-        id: version
-        run: |
-          echo "VERSION=1.0.${{ github.run_number }}" >> $GITHUB_OUTPUT
+      - name: Get the version
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
 
       - name: Create GitHub Release
         id: create_release
@@ -49,8 +49,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: 'v${{ steps.version.outputs.VERSION }}'
-          release_name: 'Release ${{ steps.version.outputs.VERSION }}'
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ steps.get_version.outputs.VERSION }}
           draft: false
           prerelease: false
 
