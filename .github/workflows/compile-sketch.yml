@@ -35,3 +35,38 @@ jobs:
             # The "blink" sketch being compiled in this demo doesn't use any libraries, so just use an empty list
             - name: RotaryEncoder
             - name: ezButton
+
+      # Move the compiled binary to a specific directory
+      - name: Move compiled binary
+        run: |
+          mkdir -p ./compiled_bin
+          mv $(find . -name "*.bin") ./compiled_bin/
+
+      
+      # Upload compiled binary as artifact
+      - name: Upload compiled binary
+        uses: actions/upload-artifact@v3
+        with:
+          name: compiled-sketch
+          path: ./compiled_bin/om0et_quansheng_control.ino.merged.bin
+
+      # Create a new GitHub release
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: 'v1.0.${{ github.run_number }}'
+          release_name: 'Release ${{ github.run_number }}'
+          draft: false
+          prerelease: false
+
+      # Upload compiled binary to the release
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./compiled_bin/*.bin
+          asset_name: compiled-sketch.bin
+          asset_content_type: application/octet-stream 
