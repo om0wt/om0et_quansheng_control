@@ -67,6 +67,6 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./compiled_bin/*.bin
+          asset_path: ./compiled_bin/om0et_quansheng_control.ino.merged.bin
           asset_name: om0et_quansheng_control.ino.merged.bin
           asset_content_type: application/octet-stream 
