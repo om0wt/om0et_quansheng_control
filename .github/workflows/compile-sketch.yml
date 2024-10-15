@@ -40,7 +40,7 @@ jobs:
       - name: Move compiled binary
         run: |
           mkdir -p ./compiled_bin
-          mv $(find . -name "*.bin") ./compiled_bin/
+          mv $(find /tmp/arduino/sketches -name "*.bin") ./compiled_bin/
 
       
       # Upload compiled binary as artifact
